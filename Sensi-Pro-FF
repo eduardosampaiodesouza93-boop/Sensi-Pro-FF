@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sense Pro FF Infinite Ultra Max</title>
+
+<style>
+body{background:#020617;color:#fff;font-family:Arial;margin:0;padding:10px}
+h2{text-align:center;color:#22d3ee}
+.card{border:1px solid #1e293b;border-radius:14px;padding:12px;margin-bottom:12px}
+button{width:100%;padding:10px;border-radius:10px;border:none;background:#22d3ee;font-weight:bold;margin-top:6px}
+input,select{width:100%;padding:7px;border-radius:8px;border:none;margin-top:5px}
+.badge{background:#1e293b;padding:6px;border-radius:8px;margin-top:6px}
+.small{font-size:12px;color:#94a3b8}
+hr{border:0;border-top:1px solid #1e293b;margin:10px 0}
+</style>
+</head>
+
+<body>
+
+<h2>🔥 SENSE PRO FF INFINITE ULTRA MAX</h2>
+<div class="small" style="text-align:center">Criador: Eduardo Sampaio</div>
+
+<!-- PERFIL -->
+<div class="card">
+<h3>👤 Perfil</h3>
+<input id="nick" placeholder="Nome do jogador">
+<select id="modo">
+<option>Rush</option>
+<option>Ranked</option>
+<option>Suporte</option>
+<option>Cura</option>
+<option>Treino</option>
+</select>
+</div>
+
+<!-- SENSIBILIDADE -->
+<div class="card">
+<h3>🎯 Sensibilidade (0–200)</h3>
+<div id="sens"></div>
+<button onclick="randomSens()">Gerar Sensibilidade Infinita</button>
+</div>
+
+<!-- DPI -->
+<div class="card">
+<h3>📱 DPI</h3>
+<input id="dpi" type="number" value="480">
+<button onclick="gerarDPI()">Gerar DPI Infinito</button>
+<div class="badge" id="dpiOut"></div>
+</div>
+
+<!-- BOTÃO -->
+<div class="card">
+<h3>🔘 Tamanho do Botão</h3>
+<input id="botao" type="number" value="55">
+<button onclick="gerarBotao()">Gerar Botão Infinito</button>
+<div class="badge" id="botaoOut"></div>
+</div>
+
+<!-- RANK -->
+<div class="card">
+<h3>🏆 Ranking</h3>
+<div class="badge" id="rank">Bronze</div>
+<button onclick="ganharXP()">Ganhar XP</button>
+</div>
+
+<!-- PERSONAGENS -->
+<div class="card">
+<h3>👥 Combinação de Personagens</h3>
+<div class="badge" id="combo">---</div>
+<button onclick="gerarPersonagens()">Gerar Combinação Infinita</button>
+</div>
+
+<!-- PETS -->
+<div class="card">
+<h3>🐾 Combinação de Pets</h3>
+<div class="badge" id="petsCombo">---</div>
+<button onclick="gerarPets()">Gerar Pets Infinito</button>
+</div>
+
+<!-- META -->
+<div class="card">
+<h3>🔥 META Completa</h3>
+<div class="badge" id="comboMeta">---</div>
+<button onclick="gerarMeta()">Gerar META Infinita</button>
+</div>
+
+<!-- IA -->
+<div class="card">
+<h3>🤖 IA de Ajuda</h3>
+<input id="q" placeholder="Pergunte sobre DPI, botão, lag, rush">
+<button onclick="ia()">Perguntar</button>
+<div class="badge" id="iaOut"></div>
+</div>
+
+<!-- GAME TURBO TODOS OS CELULARES -->
+<div class="card">
+<h3>⚙️ Game Turbo / Modo Jogo (TODOS OS CELULARES)</h3>
+
+<div class="badge"><b>Xiaomi / Redmi / Poco</b><br>
+• Game Turbo ATIVADO<br>
+• Prioridade máxima de desempenho<br>
+• Resposta ao toque máxima<br>
+• Bloquear notificações<br>
+• Limitar apps em segundo plano
+</div>
+
+<div class="badge"><b>Samsung</b><br>
+• Game Booster ligado<br>
+• FPS alto<br>
+• Reduzir resolução em segundo plano<br>
+• Economia de energia DESLIGADA
+</div>
+
+<div class="badge"><b>Motorola</b><br>
+• Modo Jogo ativado<br>
+• Bloquear chamadas e notificações<br>
+• Prioridade de CPU
+</div>
+
+<div class="badge"><b>ASUS (ROG)</b><br>
+• X-Mode ativado<br>
+• Performance máxima<br>
+• Touch sensibilidade alta
+</div>
+
+<div class="badge"><b>Realme / Oppo / Vivo</b><br>
+• Game Space / Ultra Game Mode<br>
+• Desempenho máximo<br>
+• Rede priorizada
+</div>
+
+<div class="badge"><b>iPhone</b><br>
+• Foco Jogo ativado<br>
+• Apps fechados<br>
+• Armazenamento livre<br>
+• iOS atualizado
+</div>
+
+<div class="small">
+✔️ Celular frio = melhor mira<br>
+✔️ Não jogar carregando<br>
+✔️ Capinha grossa pode causar lag
+</div>
+</div>
+
+<!-- APPS -->
+<div class="card">
+<h3>🚀 Apps para Melhorar Experiência</h3>
+<div class="badge">Game Booster</div>
+<div class="badge">GFX Tool</div>
+<div class="badge">CPU Monitor</div>
+<div class="badge">Ping Booster</div>
+<div class="small">Use apenas apps confiáveis</div>
+</div>
+
+<script>
+// UTIL
+const rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+
+// SENS
+const sensNames=["Geral","Red Dot","2x","4x","AWM","Olhadinha"];
+const sensDiv=document.getElementById("sens");
+sensNames.forEach(n=>{
+  sensDiv.innerHTML+=`
+  <label>${n}</label>
+  <input type="range" min="0" max="200" value="100" id="${n}">
+  <div class="badge" id="v${n}">100</div>`;
+  document.getElementById(n).oninput=e=>{
+    document.getElementById("v"+n).innerText=e.target.value;
+  };
+});
+function randomSens(){
+  sensNames.forEach(n=>{
+    let v=rand(0,200);
+    document.getElementById(n).value=v;
+    document.getElementById("v"+n).innerText=v;
+  });
+}
+
+// DPI / BOTÃO
+function gerarDPI(){
+  let v=rand(300,900);
+  dpi.value=v;
+  dpiOut.innerText="DPI sugerido: "+v;
+}
+function gerarBotao(){
+  let v=rand(20,80);
+  botao.value=v;
+  botaoOut.innerText="Botão: "+v+"%";
+}
+
+// RANK
+let xp=0,level=1;
+function ganharXP(){
+  xp+=10;
+  if(xp>=100){xp=0;level++}
+  let r="Bronze";
+  if(level>=5)r="Prata";
+  if(level>=10)r="Ouro";
+  if(level>=20)r="Diamante";
+  if(level>=30)r="Mestre";
+  rank.innerText=r+" | Nível "+level;
+}
+
+// PERSONAGENS
+const personagens=[
+"Alok","Chrono","Skyler","K","Jota","Moco","Maxim","Kelly",
+"Hayato","Wukong","Leon","Dimitri","Kapella","Thiva",
+"Laura","Rafael","Nikita","Miguel","Shirou","Homer"
+];
+function gerarPersonagens(){
+  combo.innerText=
+    personagens[rand(0,personagens.length-1)]+" + "+
+    personagens[rand(0,personagens.length-1)]+" + "+
+    personagens[rand(0,personagens.length-1)];
+}
+
+// PETS
+const pets=[
+"Falco","Poring","Ottero","Detective Panda","Mr. Waggor",
+"Beaston","Rockie","Dreki","Zasil","Sensei Tig"
+];
+function gerarPets(){
+  petsCombo.innerText=
+    pets[rand(0,pets.length-1)]+" + "+
+    pets[rand(0,pets.length-1)];
+}
+
+// META
+function gerarMeta(){
+  randomSens();
+  gerarDPI();
+  gerarBotao();
+  gerarPersonagens();
+  gerarPets();
+  comboMeta.innerText="META perfeita para modo "+modo.value;
+}
+
+// IA
+function ia(){
+  let t=q.value.toLowerCase();
+  let r="Pergunte sobre dpi, botão, lag, rush.";
+  if(t.includes("dpi"))r="DPI entre 420 e 560 é o mais usado.";
+  if(t.includes("botão"))r="Botão entre 45% e 60% ajuda no capa.";
+  if(t.includes("lag"))r="Ative modo jogo e feche apps.";
+  if(t.includes("rush"))r="Rush: Kelly + Jota + Alok.";
+  iaOut.innerText=r;
+}
+</script>
+
+</body>
+</html>
